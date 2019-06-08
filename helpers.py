@@ -47,3 +47,6 @@ def wait_for_ack(exchange, order_id):
         if (ack_reply["type"] == "ack" and ack_reply["order_id"] == order_id):
             print_reply(ack_reply)
             return True
+
+def create_convert_order(id, sym, size):
+    return {"type": "convert", "order_id": id, "symbol": sym, "dir": "BUY", "size": size}

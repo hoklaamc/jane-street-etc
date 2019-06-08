@@ -10,6 +10,7 @@ from __future__ import print_function
 import globals
 
 from helpers import *
+from val_arbitrage import *
 from simple_bond import *
 from simple_stocks import *
 
@@ -19,7 +20,7 @@ globals.init()
 
 def main():
     exchange = connect()
-    
+
     # Handshake
     write_to_exchange(exchange, {"type": "hello", "team": team_name.upper()})
     hello_from_exchange = read_from_exchange(exchange)
