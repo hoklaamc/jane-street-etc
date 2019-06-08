@@ -1,6 +1,4 @@
 from helpers import *
-from uuid import uuid4
-from bot import write_to_exchange, read_from_exchange
 import globals
 
 bond_fair = 1000
@@ -11,7 +9,7 @@ def simple_bond_trade(exchange):
             print("Exchange closed")
             return
         # Create bulk buy order
-        buy_order = simple_bond_buy(globals.next_order_id, 1)
+        buy_order = simple_bond_buy(globals.next_order_id, 20)
         globals.next_order_id = globals.next_order_id + 1
         write_to_exchange(exchange, buy_order)
 
@@ -29,8 +27,9 @@ def simple_bond_trade(exchange):
                 break
 
         # Create sell order
-        sell_order = simple_bond_sell(globals.next_order_id, 1)
+        sell_order = simple_bond_sell(globals.next_order_id, 20)
         globals.next_order_id = globals.next_order_id + 1
+        
         write_to_exchange(exchange, sell_order)
 
         # Wait for ack
