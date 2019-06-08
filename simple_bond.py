@@ -24,8 +24,8 @@ def val_initiator(id, exchange):
     order_used = 0
 #    print("Vale sell: ", vale_sell, " and Valbz buy: ", valbz_buy);
 #    print("Valbz sell: ", valbz_sell, " and Vale buy: ", vale_buy);
-    if (vale_sell != -1 and valbz_buy != -1 and (valbz_sell*10 < vale_buy*10 - 25)):
-        print("I am in the first of init looking to ", "buy balbz", '\n')
+    if (vale_sell != -1 and valbz_buy != -1 and (valbz_sell*10 < vale_buy*10 - 26)):
+        #print("I am in the first of init looking to ", "buy balbz", '\n')
         buy_val_arb = val_arbitrage_buy(id, 5, "VALBZ", valbz_sell)
         write_to_exchange(exchange, buy_val_arb)
         while True:
@@ -35,43 +35,43 @@ def val_initiator(id, exchange):
                 break
             elif (ack_reply["type"] == "reject"):
                 return 0
-        print("I am in the first of init looking to ", "covert my stock", '\n')
+        #print("I am in the first of init looking to ", "covert my stock", '\n')
         convert_val_arb = val_arbitrage_convert(id+1, "VALE", 5)
         write_to_exchange(exchange, convert_val_arb)
-        print("I am in the first of init looking to ", "sell vale", '\n')
+        #print("I am in the first of init looking to ", "sell vale", '\n')
         sell_val_arb = val_arbitrage_sell(id+2, 5, "VALE", vale_buy)
         write_to_exchange(exchange, sell_val_arb)
         while True:
             ack_reply = read_from_exchange(exchange)
-            print_reply(ack_reply)
+            #print_reply(ack_reply)
             if (ack_reply["type"] == "ack" and ack_reply["order_id"] == sell_val_arb["order_id"]):
-                print_reply(ack_reply)
+                #print_reply(ack_reply)
                 break
         order_used = 3;
 
-    if (valbz_sell != -1 and vale_buy != -1 and (vale_sell*10 < valbz_buy*10 - 25)):
-        print("I am in the first of init looking to ", "buy vale", '\n')
+    if (valbz_sell != -1 and vale_buy != -1 and (vale_sell*10 < valbz_buy*10 - 26)):
+        #print("I am in the first of init looking to ", "buy vale", '\n')
         buy_val_arb = val_arbitrage_buy(id, 5, "VALE", vale_sell)
         write_to_exchange(exchange, buy_val_arb)
         while True:
             ack_reply = read_from_exchange(exchange)
-            print_reply(ack_reply)
+            #print_reply(ack_reply)
             if (ack_reply["type"] == "ack" and ack_reply["order_id"] == buy_val_arb["order_id"]):
-                print_reply(ack_reply)
+                #print_reply(ack_reply)
                 break
             elif (ack_reply["type"] == "reject"):
                 return 0
-        print("I am in the first of init looking to ", "covert my stock", '\n')
+        #print("I am in the first of init looking to ", "covert my stock", '\n')
         convert_val_arb = val_arbitrage_convert(id+1, "VALBZ", 5)
         write_to_exchange(exchange, convert_val_arb)
-        print("I am in the first of init looking to ", "sell valbz", '\n')
+        #print("I am in the first of init looking to ", "sell valbz", '\n')
         sell_val_arb = val_arbitrage_sell(id+2, 5, "VALBZ", vale_buy)
         write_to_exchange(exchange, sell_val_arb)
         while True:
             ack_reply = read_from_exchange(exchange)
-            print_reply(ack_reply)
+            #print_reply(ack_reply)
             if (ack_reply["type"] == "ack" and ack_reply["order_id"] == sell_val_arb["order_id"]):
-                print_reply(ack_reply)
+                #print_reply(ack_reply)
                 break
         order_used = 3;
     return order_used
