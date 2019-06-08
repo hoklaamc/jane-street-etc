@@ -11,7 +11,7 @@ import sys
 import socket
 import json
 from helpers import *
-from bond_pennying import *
+from simple_bond import *
 
 # ~~~~~============== CONFIGURATION  ==============~~~~~
 # replace REPLACEME with your team name!
@@ -55,8 +55,11 @@ def main():
     print_reply(hello_from_exchange)
     
     while True:
+        if (exchange.closed):
+            print("Exchange closed")
+            break
         # Create buy order
-        buy_order = bond_pennying_buy(next_order_id, 1)
+        buy_order = simple_bond_buy(next_order_id, 1)
         next_order_id = next_order_id + 1
         write_to_exchange(exchange, buy_order)
 
@@ -74,7 +77,7 @@ def main():
                 break
 
         # Create sell order
-        sell_order = bond_pennying_sell(next_order_id, 1)
+        sell_order = simple_bond_sell(next_order_id, 1)
         next_order_id = next_order_id + 1
         write_to_exchange(exchange, sell_order)
 
