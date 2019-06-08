@@ -13,12 +13,7 @@ import json
 import globals
 
 from helpers import *
-<<<<<<< HEAD
-from bond_pennying import *
-from val_arbitrage import *
-=======
 from simple_bond import *
->>>>>>> 7b150a3871aa2d064342c0ebfcb09eda40537aa2
 
 # ~~~~~============== CONFIGURATION  ==============~~~~~
 
@@ -33,7 +28,7 @@ test_mode = True
 # 0 is prod-like
 # 1 is slower
 # 2 is empty
-test_exchange_index=1
+test_exchange_index=0
 prod_exchange_hostname="production"
 
 port=25000 + (test_exchange_index if test_mode else 0)
